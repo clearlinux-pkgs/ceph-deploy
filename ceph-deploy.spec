@@ -4,14 +4,13 @@
 #
 Name     : ceph-deploy
 Version  : 1.5.39
-Release  : 5
+Release  : 6
 URL      : https://pypi.python.org/packages/63/59/c2752952b7867faa2d63ba47c47da96e2f43f5124029975b579020df3665/ceph-deploy-1.5.39.tar.gz
 Source0  : https://pypi.python.org/packages/63/59/c2752952b7867faa2d63ba47c47da96e2f43f5124029975b579020df3665/ceph-deploy-1.5.39.tar.gz
 Summary  : Deploy Ceph with minimal infrastructure
 Group    : Development/Tools
 License  : MIT
 Requires: ceph-deploy-bin
-Requires: ceph-deploy-legacypython
 Requires: ceph-deploy-python3
 Requires: ceph-deploy-python
 Requires: pytest
@@ -50,19 +49,9 @@ Group: Binaries
 bin components for the ceph-deploy package.
 
 
-%package legacypython
-Summary: legacypython components for the ceph-deploy package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the ceph-deploy package.
-
-
 %package python
 Summary: python components for the ceph-deploy package.
 Group: Default
-Requires: ceph-deploy-legacypython
 Requires: ceph-deploy-python3
 
 %description python
@@ -86,15 +75,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1508536699
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1523286931
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1508536699
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -105,10 +91,6 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/ceph-deploy
-
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
 
 %files python
 %defattr(-,root,root,-)
