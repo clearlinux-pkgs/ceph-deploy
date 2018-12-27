@@ -4,26 +4,22 @@
 #
 Name     : ceph-deploy
 Version  : 2.0.1
-Release  : 12
+Release  : 13
 URL      : https://files.pythonhosted.org/packages/1f/15/8dcbd2054670a8761d6484e588739cac5681e5661e9379862d121188b545/ceph-deploy-2.0.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/1f/15/8dcbd2054670a8761d6484e588739cac5681e5661e9379862d121188b545/ceph-deploy-2.0.1.tar.gz
 Summary  : Deploy Ceph with minimal infrastructure
 Group    : Development/Tools
 License  : MIT
-Requires: ceph-deploy-bin
-Requires: ceph-deploy-python3
-Requires: ceph-deploy-license
-Requires: ceph-deploy-python
-Requires: pytest
-Requires: python-mock
+Requires: ceph-deploy-bin = %{version}-%{release}
+Requires: ceph-deploy-license = %{version}-%{release}
+Requires: ceph-deploy-python = %{version}-%{release}
+Requires: ceph-deploy-python3 = %{version}-%{release}
 Requires: setuptools
-BuildRequires : pbr
-BuildRequires : pip
+BuildRequires : buildreq-distutils3
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
 BuildRequires : python-mock
-BuildRequires : python3-dev
 BuildRequires : setuptools
 BuildRequires : tox
 BuildRequires : virtualenv
@@ -44,7 +40,7 @@ ceph-deploy -- Deploy Ceph with minimal infrastructure
 %package bin
 Summary: bin components for the ceph-deploy package.
 Group: Binaries
-Requires: ceph-deploy-license
+Requires: ceph-deploy-license = %{version}-%{release}
 
 %description bin
 bin components for the ceph-deploy package.
@@ -61,7 +57,7 @@ license components for the ceph-deploy package.
 %package python
 Summary: python components for the ceph-deploy package.
 Group: Default
-Requires: ceph-deploy-python3
+Requires: ceph-deploy-python3 = %{version}-%{release}
 
 %description python
 python components for the ceph-deploy package.
@@ -84,14 +80,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530747606
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1545875138
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/ceph-deploy
-cp LICENSE %{buildroot}/usr/share/doc/ceph-deploy/LICENSE
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/ceph-deploy
+cp LICENSE %{buildroot}/usr/share/package-licenses/ceph-deploy/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -104,8 +101,8 @@ echo ----[ mark ]----
 /usr/bin/ceph-deploy
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/ceph-deploy/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/ceph-deploy/LICENSE
 
 %files python
 %defattr(-,root,root,-)
