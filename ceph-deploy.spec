@@ -4,7 +4,7 @@
 #
 Name     : ceph-deploy
 Version  : 2.0.1
-Release  : 21
+Release  : 22
 URL      : https://files.pythonhosted.org/packages/1f/15/8dcbd2054670a8761d6484e588739cac5681e5661e9379862d121188b545/ceph-deploy-2.0.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/1f/15/8dcbd2054670a8761d6484e588739cac5681e5661e9379862d121188b545/ceph-deploy-2.0.1.tar.gz
 Summary  : Deploy Ceph with minimal infrastructure
