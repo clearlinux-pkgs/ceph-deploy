@@ -4,7 +4,7 @@
 #
 Name     : ceph-deploy
 Version  : 2.1.0
-Release  : 33
+Release  : 34
 URL      : https://github.com/ceph/ceph-deploy/archive/refs/tags/v2.1.0.tar.gz
 Source0  : https://github.com/ceph/ceph-deploy/archive/refs/tags/v2.1.0.tar.gz
 Summary  : Deploy Ceph with minimal infrastructure
