@@ -4,7 +4,7 @@
 #
 Name     : ceph-deploy
 Version  : 2.1.0
-Release  : 37
+Release  : 38
 URL      : https://github.com/ceph/ceph-deploy/archive/refs/tags/v2.1.0.tar.gz
 Source0  : https://github.com/ceph/ceph-deploy/archive/refs/tags/v2.1.0.tar.gz
 Summary  : Deploy Ceph with minimal infrastructure
@@ -15,15 +15,16 @@ Requires: ceph-deploy-license = %{version}-%{release}
 Requires: ceph-deploy-python = %{version}-%{release}
 Requires: ceph-deploy-python3 = %{version}-%{release}
 Requires: python-remoto
-Requires: setuptools
 BuildRequires : buildreq-distutils3
-BuildRequires : pluggy
-BuildRequires : py-python
-BuildRequires : pytest
+BuildRequires : pypi(configparser)
+BuildRequires : pypi(py)
+BuildRequires : pypi(remoto)
+BuildRequires : pypi(setuptools)
+BuildRequires : pypi-pluggy
+BuildRequires : pypi-pytest
+BuildRequires : pypi-tox
+BuildRequires : pypi-virtualenv
 BuildRequires : python-remoto
-BuildRequires : setuptools
-BuildRequires : tox
-BuildRequires : virtualenv
 
 %description
 An easy to use admin tool for deploy ceph storage clusters.
@@ -59,6 +60,8 @@ Summary: python3 components for the ceph-deploy package.
 Group: Default
 Requires: python3-core
 Provides: pypi(ceph_deploy)
+Requires: pypi(configparser)
+Requires: pypi(remoto)
 Requires: pypi(setuptools)
 
 %description python3
@@ -74,7 +77,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635709875
+export SOURCE_DATE_EPOCH=1641943730
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
